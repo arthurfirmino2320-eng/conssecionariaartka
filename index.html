@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Ka - Sua Vida Não é Vida Sem Os Carros Da Art Ka</title>
+    <!-- Carregando Tailwind CSS para Estilização Rápida e Responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carregando Fontes Fortes: Bebas Neue (para títulos) e Inter (para corpo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis CSS para Cores e Fontes */
+        :root {
+            --primary: #FF3B3F; /* Vermelho Forte */
+            --secondary: #FFD700; /* Dourado */
+            --background: #0d1117; /* Fundo Escuro */
+            --card-bg: #161b22; /* Fundo do Card */
+            --gradient: linear-gradient(45deg, var(--primary), var(--secondary));
+            --font-strong: 'Bebas Neue', Impact, sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Estilo Base */
+        body {
+            font-family: var(--font-body);
+            background-color: var(--background);
+            color: #f0f8ff;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Animação do Texto no Topo */
+        @keyframes color-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-text {
+            font-family: var(--font-strong);
+            font-size: 1.5rem; /* Ajuste para mobile */
+            line-height: 1.2;
+            background: var(--gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: color-shift 4s ease infinite;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+            font-weight: 900;
+        }
+
+        @media (min-width: 768px) {
+            .gradient-text {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Botões com Gradiente */
+        .gradient-btn {
+            background: var(--gradient);
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: var(--background);
+            font-family: var(--font-strong);
+        }
+        .gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 59, 63, 0.8);
+        }
+
+        /* Efeito Gradiente na Imagem (Conforme Pedido - Lado Esquerdo) */
+        .image-gradient-left {
+            position: relative;
+            z-index: 1; /* Garante que a imagem esteja acima de tudo */
+            overflow: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .image-gradient-left::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; /* Ajustado para cobrir a borda esquerda */
+            height: 100%;
+            background: linear-gradient(to right, rgba(13, 17, 23, 0.6), rgba(13, 17, 23, 0)); /* Transparência para o lado esquerdo */
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Estilo do Card com Gradiente na Borda */
+        .gradient-card-border {
+            background-color: var(--card-bg);
+            border: 2px solid transparent;
+            background-image: linear-gradient(var(--card-bg), var(--card-bg)), var(--gradient);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+		
+		.story-script-regular {
+  font-family: "Story Script", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+    </style>
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Story+Script&display=swap" rel="stylesheet">
+</head>
+<body onload="setActivePage('inicio'); setupInteractivity();">
+
+    <!-- Cabeçalho Principal (Onde a Interatividade de MouseOver Ocorre) -->
+    <header id="main-header" class="sticky top-0 z-50 bg-gray-900 shadow-xl transition-colors duration-300">
+        <div class="max-w-7xl mx-auto p-4 flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
+            <!-- Nome da Concessionária -->
+            <h1 class="text-5xl font-extrabold tracking-widest" style="font-family: var(--font-strong);">
+                <span class="text-red-600">ART</span> <span class="text-yellow-400">KA</span>
+            </h1>
+            <!-- Frase Animada -->
+            <p class="gradient-text text-center text-sm md:text-xl">
+                SUA VIDA NÃO É VIDA SEM OS CARROS DA ART KA
+            </p>
+        </div>
+        
+        <!-- Navegação Principal (Simulando 6 Páginas) -->
+        <nav class="bg-gray-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-center h-16">
+                    <div class="flex space-x-2 sm:space-x-4 md:space-x-8">
+                        <button onclick="setActivePage('inicio')" data-page="inicio" class="nav-item text-gray-300 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out border-b-2 border-transparent">INÍCIO</button>
+                        <button onclick="setActivePage('historia')" data-page="historia" class="nav-item text-gray-300 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out border-b-2 border-transparent">NOSSA HISTÓRIA</button>
+                        <button onclick="setActivePage('novidades')" data-page="novidades" class="nav-item text-gray-300 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out border-b-2 border-transparent">NOVIDADES</button>
+                        <button onclick="setActivePage('esportivos')" data-page="esportivos" class="nav-item text-gray-300 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out border-b-2 border-transparent">ESPORTIVOS</button>
+                        <button onclick="setActivePage('cadastro')" data-page="cadastro" class="nav-item text-gray-300 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out border-b-2 border-transparent">CADASTRO</button>
+                        <button onclick="setActivePage('eventos')" data-page="eventos" class="nav-item text-gray-300 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out border-b-2 border-transparent">EVENTOS</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo das Páginas (Usando flex-col para forçar o scroll em telas pequenas) -->
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col">
+
+        <!-- Página 1: INÍCIO -->
+        <section id="inicio" class="page-content space-y-12">
+            <h2 class="text-6xl font-black text-center text-red-600 mb-6" style="font-family: var(--font-strong);">BEM-VINDO À ART KA</h2>
+            <p class="text-xl text-center text-gray-300 max-w-4xl mx-auto">
+                Descubra a fusão perfeita entre arte, engenharia e velocidade. Na Art Ka, cada veículo é uma obra-prima esperando por seu artista.
+            </p>
+
+            <!-- Imagem dos Carros do Ano com Gradiente Lateral -->
+            <div class="bg-red-900/20 p-4 rounded-xl shadow-2xl">
+                <h3 class="text-4xl font-bold mb-6 text-yellow-400" style="font-family: var(--font-strong);">NOVOS LANÇAMENTOS DO ANO</h3>
+                <div class="image-gradient-left">
+                    <img src="https://placehold.co/1200x500/0d1117/FFFFFF?text=Carros+Luxuosos+do+Ano+Art+Ka" 
+                         alt="[Imagem de carros de luxo e esportivos recém-chegados na concessionária Art Ka]" 
+                         class="w-full h-auto object-cover rounded-xl shadow-lg transition-transform duration-500 hover:scale-[1.01]">
+                    <div class="absolute inset-0 flex items-center justify-center p-8 z-20">
+                        <p class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white text-left max-w-sm" style="font-family: var(--font-strong); text-shadow: 2px 2px 5px #000;">
+                            A ARTE DA ENGENHARIA AUTOMOTIVA
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página 2: NOSSA HISTÓRIA -->
+        <section id="historia" class="page-content hidden space-y-6">
+            <h2 class="text-6xl font-black text-center gradient-text" style="font-family: var(--font-strong); -webkit-text-fill-color: initial;">NOSSA HISTÓRIA</h2>
+            <div class="gradient-card-border p-8 rounded-xl max-w-4xl mx-auto">
+                <p class="text-lg leading-relaxed text-gray-200">
+                    Fundada em 2005 por uma família de entusiastas, a Art Ka nasceu da paixão por motores e design. Nosso objetivo nunca foi apenas vender carros, mas conectar pessoas com máquinas que refletem suas ambições e personalidade. Ao longo dos anos, crescemos mantendo nosso foco na curadoria de veículos de alta performance e na transparência total com nossos clientes. 
+                </p>
+                <p class="text-lg leading-relaxed text-gray-200 mt-4">
+                    Acreditamos que a verdadeira arte reside na engenharia, e cada carro em nosso estoque é uma obra-prima cuidadosamente selecionada. Somos mais do que uma concessionária, somos a sua porta de entrada para a excelência automotiva. Venha fazer parte da nossa história de velocidade e elegância.
+                </p>
+            </div>
+        </section>
+
+        <!-- Página 3: NOVIDADES DO ANO -->
+        <section id="novidades" class="page-content hidden space-y-8">
+            <h2 class="text-6xl font-black text-center text-yellow-400" style="font-family: var(--font-strong);">O QUE HÁ DE NOVO?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card Novidade 1 -->
+                <div class="gradient-card-border rounded-xl p-6 text-center">
+                    <img src="https://carroscomcamanzi.com.br/wp-content/uploads/2023/05/bmw-x6-m-com.jpg" alt="[Imagem de um carro de novidade]" class="w-full rounded-lg mb-4">
+                    <h3 class="text-3xl font-bold text-red-500" style="font-family: var(--font-strong);">O COMFORTO ABSOLUTO</h3>
+                    <p class="text-gray-400 mb-4">Tecnologia, sustentabilidade e performance em um só lugar.</p>
+                    <button class="gradient-btn px-6 py-2 rounded-full mt-2">SAIBA MAIS</button>
+                </div>
+                <!-- Card Novidade 2 -->
+                <div class="gradient-card-border rounded-xl p-6 text-center">
+                    <img src="https://i0.statig.com.br/bancodeimagens/6q/5z/u4/6q5zu485uo9cudhao90kyfqdh.jpg" alt="[Imagem de um carro de novidade]" class="w-full rounded-lg mb-4">
+                    <h3 class="text-3xl font-bold text-red-500" style="font-family: var(--font-strong);">O ESPORTIVO</h3>
+                    <p class="text-gray-400 mb-4">Conforto e adrenalina para o dia a dia.</p>
+                    <button class="gradient-btn px-6 py-2 rounded-full mt-2">SAIBA MAIS</button>
+                </div>
+                <!-- Card Novidade 3 -->
+                <div class="gradient-card-border rounded-xl p-6 text-center">
+                    <img src="https://revistacarro.com.br/wp-content/uploads/2024/04/Lamborghini3.jpg" alt="[Imagem de um carro de novidade]" class="w-full rounded-lg mb-4">
+                    <h3 class="text-3xl font-bold text-red-500" style="font-family: var(--font-strong);">O SUV DE LUXO</h3>
+                    <p class="text-gray-400 mb-4">Aventure-se com o máximo de requinte.</p>
+                    <button class="gradient-btn px-6 py-2 rounded-full mt-2">SAIBA MAIS</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página 4: CARROS ESPORTIVOS (Imagens, Nomes e Preços) -->
+        <section id="esportivos" class="page-content hidden space-y-8">
+            <h2 class="text-6xl font-black text-center text-red-600" style="font-family: var(--font-strong);">POTÊNCIA E DESIGN</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Carro 1 -->
+                <div class="gradient-card-border rounded-xl overflow-hidden shadow-2xl">
+                    <img src="https://di-uploads-pod42.dealerinspire.com/suncoastchryslerjeepdodgeram/uploads/2021/03/dodge-challenger.jpg" alt="[Imagem de um carro esportivo de alta performance]" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-4xl font-bold text-yellow-400 mb-2" style="font-family: var(--font-strong);">TEMPESTADE V8</h3>
+                        <p class="text-lg text-gray-300">Puro poder. 0-100 km/h em 3.2s de pura adrenalina. Uma máquina para dominar a pista.</p>
+                        <p class="text-2xl font-extrabold mt-4 text-red-500">R$ 980.000</p>
+                    </div>
+                </div>
+                <!-- Carro 2 -->
+                <div class="gradient-card-border rounded-xl overflow-hidden shadow-2xl">
+                    <img src="https://uploads.diariodopoder.com.br/2022/07/139aeabb-s22_3365_fine-960x640.jpg" alt="[Imagem de um carro esportivo com design agressivo]" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-4xl font-bold text-yellow-400 mb-2" style="font-family: var(--font-strong);">PORCHE GT</h3>
+                        <p class="text-lg text-gray-300">Design agressivo e manuseio preciso. A combinação perfeita de estilo e velocidade.</p>
+                        <p class="text-2xl font-extrabold mt-4 text-red-500">R$ 2.000.000</p>
+                    </div>
+                </div>
+                <!-- Carro 3 -->
+                <div class="gradient-card-border rounded-xl overflow-hidden shadow-2xl">
+                    <img src="https://placehold.co/600x400/065F46/FFFFFF?text=Furia+Azul" alt="[Imagem de um carro esportivo azul com tecnologia híbrida]" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-4xl font-bold text-yellow-400 mb-2" style="font-family: var(--font-strong);">FÚRIA AZUL</h3>
+                        <p class="text-lg text-gray-300">Tecnologia híbrida de ponta e desempenho de pista inigualável. O futuro é agora.</p>
+                        <p class="text-2xl font-extrabold mt-4 text-red-500">R$ 1.200.000</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página 5: CADASTRO NO SITE -->
+        <section id="cadastro" class="page-content hidden space-y-6">
+            <h2 class="text-6xl font-black text-center gradient-text" style="font-family: var(--font-strong); -webkit-text-fill-color: initial;">JUNTE-SE À FAMÍLIA ART KA</h2>
+            <div class="gradient-card-border p-8 rounded-xl max-w-lg mx-auto">
+                <p class="text-center text-gray-400 mb-6">Cadastre-se para receber novidades exclusivas e convites para eventos VIP.</p>
+                <form onsubmit="event.preventDefault(); showRegistrationMessage();" class="space-y-4">
+                    <div>
+                        <label for="nome" class="block text-sm font-medium text-gray-300">Nome Completo</label>
+                        <input type="text" id="nome" required class="mt-1 block w-full px-4 py-3 rounded-lg border-none bg-gray-700 text-white focus:ring-red-500 focus:border-red-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                        <input type="email" id="email" required class="mt-1 block w-full px-4 py-3 rounded-lg border-none bg-gray-700 text-white focus:ring-red-500 focus:border-red-500">
+                    </div>
+                    <div>
+                        <label for="telefone" class="block text-sm font-medium text-gray-300">Telefone</label>
+                        <input type="tel" id="telefone" class="mt-1 block w-full px-4 py-3 rounded-lg border-none bg-gray-700 text-white focus:ring-red-500 focus:border-red-500">
+                    </div>
+                    <button type="submit" class="gradient-btn w-full px-4 py-3 rounded-lg text-lg font-extrabold mt-4 shadow-lg hover:shadow-2xl">
+                        CADASTRAR
+                    </button>
+                </form>
+                <div id="registration-message" class="mt-6 text-center text-green-400 font-bold hidden"></div>
+            </div>
+        </section>
+
+        <!-- Página 6: EVENTOS COMEMORATIVOS (Carros Temáticos) -->
+        <section id="eventos" class="page-content hidden space-y-8">
+            <h2 class="text-6xl font-black text-center text-yellow-400" style="font-family: var(--font-strong);">NOSSOS EVENTOS ESPECIAIS</h2>
+            <p class="text-center text-lg text-gray-300">Participe de celebrações únicas e confira carros exclusivos baseados em temas inesquecíveis.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Evento 1: Noite do Retrô (Anos 80) -->
+                <div class="gradient-card-border rounded-xl overflow-hidden shadow-2xl">
+                    <img src="https://s2.best-wallpaper.net/wallpaper/1920x1080/1409/BMW-5-Series-E39-black-car_1920x1080.jpg" alt="[Imagem de um carro temático anos 80]" class="w-full h-48 object-cover">
+                    <div class="p-4 text-center">
+                        <h3 class="text-3xl font-bold text-red-500 mb-1" style="font-family: var(--font-strong);">NOITE DO RETRÔ (80S)</h3>
+                        <p class="text-sm text-gray-400 mb-3">Viaje no tempo com a engenharia automotiva.</p>
+                        <p class="text-lg font-bold text-yellow-400">Carro Temático: Art Ka DeLorean Reimagined</p>
+                        <p class="text-xl font-extrabold mt-2 text-red-500">Valor Estimado: R$ 450.000</p>
+                    </div>
+                </div>
+
+                <!-- Evento 2: Festival de Velocidade (Fórmula) -->
+                <div class="gradient-card-border rounded-xl overflow-hidden shadow-2xl">
+                    <img src="https://i.auto-bild.de/ir_img/3/8/1/9/1/8/5/Koenigsegg-Jesko-3797-1010x568-f2aad3e74fb4ecc6.jpg?impolicy=og_images" alt="[Imagem de um carro temático de Fórmula 1]" class="w-full h-48 object-cover">
+                    <div class="p-4 text-center">
+                        <h3 class="text-3xl font-bold text-red-500 mb-1" style="font-family: var(--font-strong);">FESTIVAL DE VELOCIDADE</h3>
+                        <p class="text-sm text-gray-400 mb-3">Pura aerodinâmica e força G.</p>
+                        <p class="text-lg font-bold text-yellow-400">Carro Temático: Art Ka F1 Edition</p>
+                        <p class="text-xl font-extrabold mt-2 text-red-500">Valor Estimado: R$ 15.500.000</p>
+                    </div>
+                </div>
+
+                <!-- Evento 3: Elegância e Champanhe (Clássicos de Luxo) -->
+                <div class="gradient-card-border rounded-xl overflow-hidden shadow-2xl">
+                    <img src="https://www.webmotors.com.br/wp-content/uploads/2023/03/10135519/2023-ferrari-purosangue-6356-2.webp" alt="[Imagem de um carro temático clássico de luxo]" class="w-full h-48 object-cover">
+                    <div class="p-4 text-center">
+                        <h3 class="text-3xl font-bold text-red-500 mb-1" style="font-family: var(--font-strong);">ELEGÂNCIA E CHAMPANHE</h3>
+                        <p class="text-sm text-gray-400 mb-3">O luxo atemporal e o conforto dos clássicos.</p>
+                        <p class="text-lg font-bold text-yellow-400">Carro Temático: Art Ka Royale</p>
+                        <p class="text-xl font-extrabold mt-2 text-red-500">Valor Estimado: R$ 7.500.000</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé com Transparência e Centralizado -->
+    <footer class="bg-gray-900/70 backdrop-blur-sm mt-12 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-lg text-gray-400 font-medium italic">
+                "Não é sobre a chegada, é sobre a excelência da viagem."
+            </p>
+            <p class="text-sm text-gray-600 mt-2">&copy; 2025 Art Ka Concessionária. A Arte do Automóvel.</p>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * Lógica de Troca de Páginas (Simulando as 6 Páginas em um Único HTML)
+         */
+        function setActivePage(pageId) {
+            // Esconde todo o conteúdo
+            document.querySelectorAll('.page-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('flex-grow'); // Remove crescimento para evitar layout estranho
+            });
+
+            // Mostra o conteúdo da página solicitada
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                targetPage.classList.add('flex-grow'); // Garante que o conteúdo ocupe o espaço
+            }
+
+            // Atualiza o estado ativo na navegação
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('text-yellow-400', 'border-yellow-400');
+                el.classList.add('border-transparent');
+            });
+            document.querySelector(`.nav-item[data-page="${pageId}"]`).classList.add('text-yellow-400', 'border-b-2', 'border-yellow-400');
+
+            // Scroll para o topo ao trocar de "página"
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /**
+         * Interatividade Requerida: Altera a cor do Header ao Encostar o Mouse
+         */
+        function setupInteractivity() {
+            const header = document.getElementById('main-header');
+            if (header) {
+                header.addEventListener('mouseover', () => {
+                    // Efeito de sombra ou cor suave
+                    header.classList.add('bg-gray-800', 'shadow-red-500/50');
+                    header.classList.remove('bg-gray-900', 'shadow-xl');
+                });
+                header.addEventListener('mouseout', () => {
+                    // Volta ao estado normal
+                    header.classList.remove('bg-gray-800', 'shadow-red-500/50');
+                    header.classList.add('bg-gray-900', 'shadow-xl');
+                });
+            }
+        }
+
+        /**
+         * Mensagem de Confirmação de Cadastro (Substituindo o alert() Proibido)
+         */
+        function showRegistrationMessage() {
+            const messageEl = document.getElementById('registration-message');
+            const nome = document.getElementById('nome').value;
+
+            messageEl.textContent = `Obrigado, ${nome}! Seu cadastro foi realizado com sucesso. Aguarde nossos comunicados!`;
+            messageEl.classList.remove('hidden');
+
+            // Limpa o formulário após 3 segundos
+            setTimeout(() => {
+                document.getElementById('cadastro').querySelector('form').reset();
+                messageEl.classList.add('hidden');
+            }, 3000);
+        }
+
+    </script>
+</body>
+</html>
